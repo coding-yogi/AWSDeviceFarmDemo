@@ -1,12 +1,13 @@
 package com.ui.pageobjects.autodesk.accounts;
 
+import com.framework.core.BasePage;
 import com.framework.core.Wrappers;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by gadrea on 5/5/2015.
  */
-public class ProfilePage {
+public class ProfilePage extends BasePage{
 
     private WebDriver driver;
     private Wrappers objWrapper;

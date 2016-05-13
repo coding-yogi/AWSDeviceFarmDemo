@@ -7,8 +7,8 @@
             <class name="com.tests.ui.autodesk.accounts.TestsForIdentityOnAndroid">
                 <methods>
                     <include name="testValidLogin"/>
-                    <include name="testInvalidLoginError"/>
-                    <include name="testBlankCredentialsError"/>
+                    <include name="testErrorForInvalidPassword"/>
+                    <include name="testErrorForInvalidUserName"/>
                 </methods>
             </class>
         </classes>

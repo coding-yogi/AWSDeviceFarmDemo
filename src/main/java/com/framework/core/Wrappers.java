@@ -356,6 +356,28 @@ public class Wrappers {
     }
 
     //*****************************************************************************************
+    //*	Name		    : waitForWebElementToBeVisibleAndEnabled
+    //*	Author		    : Aniket Gadre
+    //*****************************************************************************************
+    public Wrappers waitForWebElementToBeVisibleAndEnabled(WebElement element,int seconds){
+
+        while((!element.isDisplayed() || !element.isEnabled()) && seconds>0){
+            try{
+                Thread.sleep(seconds*1000);
+                seconds --;
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        if(seconds == 0)
+            throw(new ElementNotVisibleException("Wrapper method waitForWebElementToBeVisibleAndEnabled() : Element with desc " + element.toString() + "is either not visible or is not enabled"));
+
+        return this;
+    }
+
+    //*****************************************************************************************
     //*	Name		    : click
     //*	Author		    : Aniket Gadre
     //*****************************************************************************************
@@ -372,17 +394,8 @@ public class Wrappers {
     //*****************************************************************************************
     public Wrappers click(WebElement objClick)
     {
-        String strDesc = objClick.toString();
-
-        //Check if the object is enabled, if yes click the same
-        if (objClick.isDisplayed() && objClick.isEnabled()){
-            //Click on the object
-            objClick.click();
-        }
-        else{
-            throw(new ElementNotVisibleException("Wrapper method click() : Element is either not visible or is not enabled"));
-        }
-
+        waitForWebElementToBeVisibleAndEnabled(objClick,5);
+        objClick.click();
         return this;
     }	
 
@@ -402,18 +415,9 @@ public class Wrappers {
     //*****************************************************************************************
     public Wrappers enterText(WebElement objEdit, String strText)
     {
-    	String strDesc = objEdit.toString();
-
-        //Check if the object is enabled, if yes click the same
-        if (objEdit.isDisplayed() && objEdit.isEnabled()){
-            //Enter the text in the edit box
-            objEdit.clear();
-            objEdit.sendKeys(strText);
-        }
-        else{
-            throw(new ElementNotVisibleException("Wrapper method enterText() : Element with description " + strDesc + " is either not visible or is not enabled"));
-        }
-
+        waitForWebElementToBeVisibleAndEnabled(objEdit,5);
+        objEdit.clear();
+        objEdit.sendKeys(strText);
         return this;
     }	
 

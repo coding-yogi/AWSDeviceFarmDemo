@@ -1,5 +1,6 @@
 package com.ui.pageobjects.autodesk.accounts;
 
+import com.framework.core.BasePage;
 import com.framework.core.Wrappers;
 import com.framework.handlers.XMLHandler;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +8,8 @@ import org.w3c.dom.Element;
 
 import java.io.InputStream;
 
-public class LaunchApplication {
+public class LaunchApplication extends BasePage{
 
-	private WebDriver driver;
-	private Wrappers objWrapper;
 	private XMLHandler xmlHandler;
 
 	public LaunchApplication(WebDriver driver){
@@ -21,10 +20,10 @@ public class LaunchApplication {
 		this.xmlHandler = new XMLHandler(inputStream);
 	}	
 	
-	public LoginPage launchIdentityApplication(){
+	public LandingPage launchIdentityApplication(){
 		String url = ((Element)(xmlHandler.getElementByName("dev").getElementsByTagName("oxygen_url")).item(0)).getTextContent();
 		driver.get(url);
 		objWrapper.takeScreenshot("launchApplication");
-		return new LoginPage(driver);
+		return new LandingPage(driver);
 	}
 }
